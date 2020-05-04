@@ -17,34 +17,36 @@
 using namespace std;
 typedef unsigned long long ll;
 
-int main() {
-    cin.tie(0);
-    int N;cin>>N;
-    int M;cin>>M;
-    int Q;cin>>Q;
-    vector<int>a(Q);
-    vector<int>b(Q);
-    vector<int>c(Q);
-    vector<int>d(Q);
-    int keep1, keep2,keep3,kee4;
+int N,M,Q;
+vector<int> a,b,c,d;
+int ans;
 
-    for(int i = 0; i < Q; i++){
-        cin>>keep1>>keep2>>keep3>>kee4;
-        a.at(i)=keep1;
-        // cin>>hoge;
-        b.at(i)=keep2;
-        // cin>>hoge;
-        c.at(i)=keep3;
-        // cin>>hoge;
-        d.at(i)=kee4;
+void dfs(vector<int> A){
+    if(A.size() == N+1){
+        int now = 0;
+        for(int i = 0; i < Q; i++){
+            if(A[b[i]] - A[a[i]] == c[i])now += d[i];
+        }
+        ans = max(ans, now);
+        return;
     }
 
+    A.push_back(A.back());
+    while(A.back() <= M){
+        dfs(A);
+        A.back()++;
+    }
+}
 
-    vector<int>A(N,1);
-    ll cnt = 0;
-    ll max = 0;
+int main() {
+    cin.tie(0);
+    cin>>N;cin>>M;cin>>Q;
+    a = b = c = d = vector<int> (Q);
+    for(int i = 0; i < Q; i++){
+        cin>>a[i] >> b[i] >>c[i] >>d[i];
+    }
 
-    
-
+    dfs(vector<int> (1,1));
+    cout << ans << endl;
    return 0;
 }
