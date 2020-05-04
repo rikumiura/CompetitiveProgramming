@@ -19,6 +19,11 @@ typedef unsigned long long ll;
 
 int main() {
     cin.tie(0);
-
+    ll A,B,N;
+    cin>>A>>B>>N;
+    ll x = min(B-1, N);
+    ll ans = (ll)(A*x/B)-A*(ll)(x/B);
+    cout<<ans<<endl;
+    // cout<<(int)(5/2)<<endl;
     return 0;
 }
